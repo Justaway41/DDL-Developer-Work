@@ -43,11 +43,9 @@
 
 @endforeach
 </table>
-    <div class=" w-50 ">
-      <button class="btn btn-primary align-self-end w-20">
+    <div class=" w-50 d-flex flex-row-reverse ">
 
-        <a class="text-light" href="/listings/create" >Create User</a>
-      </button>
+    <a class="btn btn-primary w-20" href="/listings/create" role="button">Create User</a>
   </div>
 
 </x-layout>
