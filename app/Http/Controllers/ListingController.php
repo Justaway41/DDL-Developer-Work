@@ -21,7 +21,7 @@ class ListingController extends Controller
         return view('listings.create');
     }
 
-    //Store User data
+    //Validate and Store User data 
     public function store(Request $request ){
         $formFields = $request -> validate([
             'name' => 'required',
