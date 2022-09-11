@@ -9,28 +9,31 @@ use Illuminate\Validation\Rule;
 class ListingController extends Controller
 {
     //Get and show all Users
-    public function index(){
-       
+    public function index()
+    {
+
         return view('listings.index', [
             'listings' => Listing::all()
         ]);
     }
 
     //Show Create Form
-    public function create(){
+    public function create()
+    {
         return view('listings.create');
     }
 
     //Validate and Store User data 
-    public function store(Request $request ){
-        $formFields = $request -> validate([
+    public function store(Request $request)
+    {
+        $formFields = $request->validate([
             'name' => 'required',
-            'email' => ['required','email', Rule::unique('listings','email')],
+            'email' => ['required', 'email', Rule::unique('listings', 'email')],
             'address' => 'required'
         ]);
 
-        if($request->hasFile('image')){
-            $formFields['image'] = $request->file('image')->store('userImages','public');
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('userImages', 'public');
         }
 
         listing::create($formFields);
@@ -40,20 +43,22 @@ class ListingController extends Controller
     }
 
     //Show Edit Form
-    public function edit(Listing $listing){
-        return view('listings.edit',['listing'=>$listing]);
+    public function edit(Listing $listing)
+    {
+        return view('listings.edit', ['listing' => $listing]);
     }
 
     //Update User Details
-    public function update(Request $request, Listing $listing ){
-        $formFields = $request -> validate([
+    public function update(Request $request, Listing $listing)
+    {
+        $formFields = $request->validate([
             'name' => 'required',
-            'email' => ['required','email'],
+            'email' => ['required', 'email'],
             'address' => 'required'
         ]);
 
-        if($request->hasFile('image')){
-            $formFields['image'] = $request->file('image')->store('userImages','public');
+        if ($request->hasFile('image')) {
+            $formFields['image'] = $request->file('image')->store('userImages', 'public');
         }
 
         $listing->update($formFields);
@@ -63,12 +68,10 @@ class ListingController extends Controller
     }
 
     //Delete User Data
-    public function delete(listing $listing ){
+    public function delete(listing $listing)
+    {
         $listing->delete();
 
         return redirect('/');
     }
-
 }
-
-
